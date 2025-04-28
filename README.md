@@ -4,7 +4,22 @@ matlab code that find all combos of the numbers 1 through N such that no number 
 n=9;
 arr=ones(1,n);
 count=0;
-for i=1:n^n
+for j=1:n
+    arr(j)=n-j+1;
+end
+i=0;
+while i==0
+    arr(1)=arr(1)+1;
+    for j=1:n-1
+        if arr(j)>n
+            if j==n
+                break
+            else
+                arr(j)=1;
+                arr(j+1)=arr(j+1)+1;
+            end
+        end
+    end
     err=0;
     arr1=zeros(1,n);
     for j=1:n
@@ -17,15 +32,12 @@ for i=1:n^n
     if err==0
         count=count+1;
     end
-    arr(1)=arr(1)+1;
-    for j=1:n-1
-        if arr(j)>n
-            if j==n
-                break
-            else
-                arr(j)=1;
-                arr(j+1)=arr(j+1)+1;
-            end
+    for j=1:n
+        if arr(j)==j
+            i=i+1;
         end
+    end
+    if i~=n
+        i=0;
     end
 end
